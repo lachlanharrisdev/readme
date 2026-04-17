@@ -1,0 +1,16 @@
+ReadMe
+======
+
+This portion of the monorepo is the frontend for `ReadMe`, a student productivity tool for balancing the texts you want to read versus the ones you need to.
+
+The frontend has been created with SvelteKit, and it is recommended to test with the docker compose setup in the root of the monorepo
+
+Links
+-----
+
+* GitHub Repository: https://github.com/lachlanharrisdev/readme
+
+-------
+This project is delivered under the Apache 2.0 License.
+
+Copyright (c) 2026 Lachlan Harris. All Rights Reserved.

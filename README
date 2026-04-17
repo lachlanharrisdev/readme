@@ -1,0 +1,20 @@
+ReadMe
+======
+
+ReadMe is a student productivity tool for scheduling when to read the texts you want to, read versus the ones you need to.
+
+`frontend/` contains the SvelteKit app for the frontend portion of the application.
+
+`backend/` contains the Python app for the backend portion of the application.
+
+The root of the monorepo (here) contains the relevant docker / docker-compose setup for running the application, as well as CI and repository configuration.
+
+Links
+-----
+
+* GitHub Repository: https://github.com/lachlanharrisdev/readme
+
+-------
+This project is delivered under the Apache 2.0 License.
+
+Copyright (c) 2026 Lachlan Harris. All Rights Reserved.
