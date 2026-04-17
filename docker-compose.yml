@@ -2,6 +2,16 @@
 # This code is licensed under Apache 2.0
 
 services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg://app:app@db:5432/app
+
   frontend:
     build:
       context: ./frontend
