@@ -1,0 +1,20 @@
+# Copyright (c) 2026 Lachlan Harris. All Rights Reserved.
+# This code is licensed under Apache 2.0
+#
+# Deploy the application to my raspi at home. The remaining work is done on the pi
+# to manage the reverse proxy & tunnel to the public internet
+
+name: Deploy to Pi
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker compose pull
+      - run: docker compose up -d
