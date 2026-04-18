@@ -1,8 +1,6 @@
-from __future__ import annotations
-
 from fastapi import FastAPI
 
-from .db import get_engine, ping_db
+from .api.v1.db import get_engine, ping_db
 
 app = FastAPI(title="ReadMe Backend", version="0.1.0")
 
