@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+import uvicorn
 
 from .api.v1.db import get_engine, ping_db
 

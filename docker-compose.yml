@@ -9,6 +9,12 @@ services:
       - "8000:8000"
     depends_on:
       - db
+
+    # enable hot-reloading for development
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--reload-dir", "/app/app"]
+    volumes:
+      - ./backend/app:/app/app
+
     environment:
       DATABASE_URL: postgresql+psycopg://app:app@db:5432/app
 
@@ -19,6 +25,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - backend
     environment:
       NODE_ENV: production
 
