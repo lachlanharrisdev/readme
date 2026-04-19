@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Lachlan Harris. All Rights Reserved.
 # This project is licensed under Apache 2.0
 #
-# src/api/v1/api.py
+# app/api/v1/api.py
 # Primary API router for V1. This file can be considered the
 # "main" file for the API
 

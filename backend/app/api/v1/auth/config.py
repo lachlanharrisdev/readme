@@ -1,10 +1,11 @@
 # Copyright (c) 2026 Lachlan Harris. All Rights Reserved.
 # This project is licensed under Apache 2.0
 #
-# src/api/v1/auth/env.py
+# app/api/v1/auth/env.py
 # Manages authentication-specific env variables & constants
 
 import os
+from datetime import datetime
 
 from dotenv import load_dotenv
 
@@ -29,35 +30,50 @@ password_hash = PasswordHash.recommended()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/token")
 
-fake_users_db = {
-    "lachlanharris": {
-        "username": "lachlanharris",
-        "full_name": "Lachlan Harris",
-        "email": "contact@lachlanharris.dev",
-        "hashed_password": "$argon2id$v=19$m=65536,t=3,p=4$wagCPXjifgvUFBzq4hqe3w$CYaIb8sB+wtD+Vu/P4uod1+Qof8h+1g7bbDlBID48Rc",  # "secret"
-        "disabled": False,
-    }
-}
-
 # Types
 # -----
 
 
 class Token(BaseModel):
+    """
+    Represents a JWT access token response
+    """
+
     access_token: str
     token_type: str
 
 
 class TokenData(BaseModel):
+    """
+    Represents the data contained within a JWT access token
+    """
+
     username: str | None = None
 
 
 class User(BaseModel):
+    """
+    Represents a user in the system, excluding sensitive information
+    for the purpose of API responses (i.e. /api/v1/auth/me)
+    """
+
+    id: int
     username: str
-    email: str | None = None
-    full_name: str | None = None
-    disabled: bool | None = None
+    created_at: datetime | None = None
 
 
 class UserInDB(User):
-    hashed_password: str
+    """
+    Represents a user in the database, including sensitive information
+    """
+
+    password_hash: str
+
+
+class UserCreate(BaseModel):
+    """
+    Represents the data required to create a new user account
+    """
+
+    username: str
+    password: str
