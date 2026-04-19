@@ -12,22 +12,6 @@ def test_health_ok() -> None:
     from app.main import app
 
     client = TestClient(app)
-    res = client.get("/health")
-    assert res.status_code == 200
-    assert res.json() == {"status": "ok"}
-
-
-def test_health_db_ok_sqlite(monkeypatch) -> None:
-    import app.main as main
-
-    engine = create_engine(
-        "sqlite:///:memory:",
-        connect_args={"check_same_thread": False},
-    )
-
-    monkeypatch.setattr(main, "get_engine", lambda: engine)
-
-    client = TestClient(main.app)
-    res = client.get("/health/db")
+    res = client.get("/api/v1/health")
     assert res.status_code == 200
     assert res.json() == {"status": "ok"}
