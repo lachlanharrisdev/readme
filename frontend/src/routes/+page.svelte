@@ -8,6 +8,7 @@ src/routes/+page.svelte
 <script lang="ts">
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Bento from '$lib/components/bento.svelte';
+    import Textitem from '$lib/components/textitem.svelte';
 </script>
 
 <main class="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -91,35 +92,8 @@ src/routes/+page.svelte
 			</div>
 
 			<div class="flex flex-col gap-2">
-				<div
-					class="flex items-center gap-5 p-4 rounded-[16px] hover:bg-surface-container-low transition-colors cursor-pointer group"
-				>
-					<div
-						class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface group-hover:bg-surface-container-lowest transition-colors"
-					>
-						<span class="material-symbols-outlined">menu_book</span>
-					</div>
-					<div class="flex-1">
-						<h4 class="text-base font-bold text-on-surface">Orbital</h4>
-						<p class="text-sm text-on-surface-variant">Tomorrow</p>
-					</div>
-					<div class="text-sm font-medium text-on-surface-variant bg-surface px-3 py-1.5 rounded-pill">50 pages</div>
-				</div>
-
-				<div
-					class="flex items-center gap-5 p-4 rounded-[16px] hover:bg-surface-container-low transition-colors cursor-pointer group"
-				>
-					<div
-						class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface group-hover:bg-surface-container-lowest transition-colors"
-					>
-						<span class="material-symbols-outlined">contract</span>
-					</div>
-					<div class="flex-1">
-						<h4 class="text-base font-bold text-on-surface">Eng Ext 1 BM Article 1</h4>
-						<p class="text-sm text-on-surface-variant">In 2 days</p>
-					</div>
-					<div class="text-sm font-medium text-on-surface-variant bg-surface px-3 py-1.5 rounded-pill">20 pages</div>
-				</div>
+				<Textitem title="Orbital" due="Tomorrow" pages="50" />
+				<Textitem title="Eng Ext 1 BM Article 1" due="In 2 days" pages="20" icon="contract" />
 			</div>
 		</Bento>
 

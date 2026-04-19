@@ -8,6 +8,8 @@ src/routes/schedule/+page.svelte
 <script lang="ts">
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Bento from '$lib/components/bento.svelte';
+    import Textitem from '$lib/components/textitem.svelte';
+    import { page } from '$app/state';
 </script>
 
 <main class="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -50,7 +52,7 @@ src/routes/schedule/+page.svelte
 						You're laziness is through the roof! At this rate, you'll finish <strong class="text-on-surface">Blood Meridian</strong> in the year 2194. Try picking up the pace to hit your target date of April 24.
                     </p>
 				</div>
-				<div class="w-16 h-16 rounded-full bg-secondary-container hidden md:flex items-center justify-center flex-shrink-0">
+				<div class="w-16 h-16 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0">
 					<span class="material-symbols-outlined text-primary text-3xl">trending_up</span>
 				</div>
 			</div>
@@ -60,7 +62,7 @@ src/routes/schedule/+page.svelte
 	<section>
 		<div class="flex overflow-x-auto space-x-6 pb-12 snap-x snap-mandatory">
 			<div
-				class="snap-start flex-shrink-0 w-[360px] bg-surface-container-lowest rounded-bento p-7 relative"
+				class="snap-start flex-shrink-0 w-[400px] max-w-[90vw] bg-surface-container-lowest rounded-bento p-7 relative"
 			>
 
 				<div class="mb-8 flex justify-between items-start">
@@ -69,71 +71,40 @@ src/routes/schedule/+page.svelte
 						<span class="block text-4xl font-extrabold text-on-surface">24</span>
 					</div>
 					<div class="bg-secondary-container text-primary-container px-4 py-1.5 rounded-pill text-sm font-bold">
-						50 pages
+						Today
 					</div>
 				</div>
 
 				<div class="space-y-4">
-					<div
-						class="bg-surface rounded-DEFAULT p-4 flex gap-4 items-center hover:bg-surface-container-low transition-colors cursor-pointer"
-					>
-						<div
-							class="w-12 h-12 rounded-full bg-surface-container-lowest flex items-center justify-center flex-shrink-0"
-						>
-							<span class="material-symbols-outlined fill text-primary text-xl">menu_book</span>
-						</div>
-						<div class="flex-1 min-w-0">
-							<p class="text-sm font-bold text-on-surface truncate">Blood Meridian</p>
-							<p class="text-xs text-on-surface-variant font-medium mt-0.5">50 pages</p>
-						</div>
-						<span class="material-symbols-outlined text-outline-variant text-sm">chevron_right</span>
-					</div>
+					<Textitem title="Blood Meridian" pages="50" author="Cormac McCarthy"/>
 				</div>
 			</div>
 
 			<div
-				class="snap-start flex-shrink-0 w-[360px] bg-surface-container-lowest rounded-bento p-7 opacity-90 hover:opacity-100 transition-opacity"
+				class="snap-start flex-shrink-0 w-[400px] max-w-[90vw] bg-surface-container-lowest rounded-bento p-7 opacity-90 hover:opacity-100 transition-opacity"
 			>
 				<div class="mb-8 flex justify-between items-start">
 					<div>
 						<span class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Thu</span>
 						<span class="block text-4xl font-extrabold text-on-surface">25</span>
 					</div>
-					<div class="bg-surface text-on-surface-variant px-4 py-1.5 rounded-pill text-sm font-bold">50 pages</div>
 				</div>
 				<div class="space-y-4">
-					<div class="bg-surface rounded-DEFAULT p-4 flex gap-4 items-center">
-						<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0">
-							<span class="material-symbols-outlined text-on-surface-variant text-xl">menu_book</span>
-						</div>
-						<div class="flex-1 min-w-0">
-							<p class="text-sm font-bold text-on-surface truncate">Orbital</p>
-							<p class="text-xs text-on-surface-variant font-medium mt-0.5">50 pages</p>
-						</div>
-					</div>
+					<Textitem title="Orbital" pages="50" author="Samantha Harvey"/>
 				</div>
 			</div>
 
 			<div
-				class="snap-start flex-shrink-0 w-[360px] bg-surface-container-lowest rounded-bento p-7 opacity-90 hover:opacity-100 transition-opacity"
+				class="snap-start flex-shrink-0 w-[400px] max-w-[90vw] bg-surface-container-lowest rounded-bento p-7 opacity-90 hover:opacity-100 transition-opacity"
 			>
 				<div class="mb-8 flex justify-between items-start">
 					<div>
 						<span class="block text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Fri</span>
 						<span class="block text-4xl font-extrabold text-on-surface">26</span>
 					</div>
-					<div class="bg-surface text-on-surface-variant px-4 py-1.5 rounded-pill text-sm font-bold">20 pages</div>
 				</div>
 				<div class="space-y-4">
-					<div class="bg-surface rounded-DEFAULT p-4 flex gap-4 items-center">
-						<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0">
-							<span class="material-symbols-outlined text-on-surface-variant text-xl">menu_book</span>
-						</div>
-						<div class="flex-1 min-w-0">
-							<p class="text-sm font-bold text-on-surface truncate">Eng Ext 1 BM Article</p>
-							<p class="text-xs text-on-surface-variant font-medium mt-0.5">20 pages</p>
-						</div>
-					</div>
+					<Textitem title="Eng Ext 1 BM Article" pages="20" icon="contract" />
 				</div>
 			</div>
 
@@ -141,7 +112,7 @@ src/routes/schedule/+page.svelte
 		</div>
 	</section>
 
-    	<section class="mb-10">
+	<section class="mb-10">
 		<Bento>
 			<h3 class="text-xl font-bold tracking-tight text-on-surface mb-6">Set Your Weekly Schedule</h3>
 			<form class="space-y-6">
