@@ -29,7 +29,7 @@ src/routes/+layout.svelte
 
 <div class="min-h-screen bg-surface text-on-surface font-body antialiased">
 	<TopNav />
-	<div class="pt-28 pb-16">
+	<div class="py-8">
 		{@render children()}
 	</div>
 </div>
