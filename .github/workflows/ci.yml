@@ -1,14 +1,16 @@
 # Copyright (c) 2026 Lachlan Harris. All Rights Reserved.
 # This code is licensed under Apache 2.0
 #
-# Run pytest tests for the backend. Done on every push & pr
-# so its not necessary to run on deploy
+# CI/CD workflow for backend CI and full-stack deployment
 
 on:
   push:
   pull_request:
 
 jobs:
+  # continueous integration test job
+  # runs on every push and pull request via pytest
+  # NOTE: only tests the backend
   test:
     runs-on: ubuntu-latest
 
@@ -30,3 +32,16 @@ jobs:
       - name: Run tests
         run: |
           PYTHONPATH=backend pytest -q backend/tests
+
+
+  # deploy to raspberry pi 5
+  # only deploy on pushes to main, and only after tests have passed
+  deploy:
+    runs-on: self-hosted
+    needs: test
+    if: github.ref == 'refs/heads/main' # only deploy on pushes to main
+
+    steps:
+      - uses: actions/checkout@v6
+      - run: docker compose pull
+      - run: docker compose up -d --build

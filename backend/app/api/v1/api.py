@@ -1,0 +1,16 @@
+# Copyright (c) 2026 Lachlan Harris. All Rights Reserved.
+# This project is licensed under Apache 2.0
+#
+# src/api/v1/api.py
+# Primary API router for V1. This file can be considered the
+# "main" file for the API
+
+from fastapi import APIRouter
+
+from .auth import endpoints
+from . import health
+
+api_router = APIRouter()
+api_router.include_router(endpoints.router, prefix="/auth", tags=["auth"])
+
+api_router.include_router(health.router, prefix="/health", tags=["health"])
