@@ -17,4 +17,4 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - run: docker compose pull
-      - run: docker compose up -d
+      - run: docker compose up -d --build
