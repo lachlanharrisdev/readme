@@ -17,7 +17,7 @@ src/routes/settings/+page.svelte
 	/>
 
 	<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-		<Bento class="md:col-span-12 p-8 xl:p-10 flex flex-col md:flex-row items-start md:items-center gap-8 relative overflow-hidden">
+		<Bento class="md:col-span-12 flex flex-col md:flex-row items-start md:items-center gap-8 relative overflow-hidden">
 			<span
 				class="material-symbols-outlined fill absolute -right-12 -bottom-12 text-[200px] text-surface-container-low opacity-50 pointer-events-none select-none"
 			>
@@ -57,7 +57,7 @@ src/routes/settings/+page.svelte
 			</div>
 		</Bento>
 
-		<Bento class="md:col-span-6 p-8 xl:p-10 relative overflow-hidden">
+		<Bento class="md:col-span-6 relative overflow-hidden">
 			<div class="flex items-center gap-3 mb-8">
 				<span class="material-symbols-outlined text-on-surface-variant">manage_accounts</span>
 				<h3 class="text-xl font-headline font-semibold text-on-surface tracking-tight">Account Settings</h3>
@@ -107,7 +107,7 @@ src/routes/settings/+page.svelte
 			</div>
 		</Bento>
 
-		<Bento class="md:col-span-6 p-8 xl:p-10">
+		<Bento class="md:col-span-6">
 			<div class="flex items-center gap-3 mb-8">
 				<span class="material-symbols-outlined text-on-surface-variant">tune</span>
 				<h3 class="text-xl font-headline font-semibold text-on-surface tracking-tight">App Preferences</h3>
@@ -152,7 +152,7 @@ src/routes/settings/+page.svelte
 			</div>
 		</Bento>
 
-		<Bento class="md:col-span-12 p-8 border border-error-container/50">
+		<Bento class="md:col-span-12 border border-error-container/50">
 			<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
 				<div>
 					<h3 class="text-lg font-headline font-semibold text-error tracking-tight mb-2 flex items-center gap-2">

@@ -13,6 +13,6 @@ src/lib/components/bento.svelte
 	} & Record<string, unknown>>();
 </script>
 
-<div {...rest} class={`bg-surface-container-lowest rounded-bento ${className}`.trim()} {style}>
+<div {...rest} class={`bg-surface-container-lowest rounded-bento p-6 md:p-10 ${className}`.trim()} {style}>
 	{@render children?.()}
 </div>

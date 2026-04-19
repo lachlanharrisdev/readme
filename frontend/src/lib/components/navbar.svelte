@@ -7,6 +7,7 @@ src/lib/components/navbar.svelte
 
 <script lang="ts">
 	import { page } from '$app/state';
+	import { afterNavigate } from '$app/navigation';
 
 	type NavItem = {
 		href: string;
@@ -20,20 +21,33 @@ src/lib/components/navbar.svelte
 		{ href: '/settings', label: 'Settings' }
 	];
 
+	let mobileOpen = $state(false);
+
 	const isActive = (href: string) => {
 		if (href === '/') return page.url.pathname === '/';
 		return page.url.pathname.startsWith(href);
 	};
+
+	afterNavigate(() => {
+		mobileOpen = false;
+	});
+
+	const onWindowKeydown = (event: KeyboardEvent) => {
+		if (event.key === 'Escape') mobileOpen = false;
+	};
 </script>
 
+<svelte:window onkeydown={onWindowKeydown} />
+
 <nav
-	class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-8 py-4 bg-surface/80 backdrop-blur-xl"
+	class="fixed top-0 left-0 w-full z-50 relative flex items-center justify-between px-6 md:px-8 py-4 bg-surface/80 backdrop-blur-xl"
 >
 	<div class="flex items-center gap-4">
 		<a href="/" class="text-xl font-extrabold tracking-tighter text-on-surface">ReadMe</a>
 	</div>
 
-	<div class="flex-1 flex justify-center">
+	<!-- desktop nav -->
+	<div class="flex-1 hidden sm:flex justify-center">
 		<div class="flex items-center gap-2 sm:gap-1 text-sm tracking-tight">
 			{#each navItems as item (item.href)}
 				<a
@@ -50,6 +64,18 @@ src/lib/components/navbar.svelte
 	</div>
 
 	<div class="flex items-center gap-3">
+		<!-- mobile hamburger toggle -->
+		<button
+			type="button"
+			class="sm:hidden w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
+			aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+			aria-expanded={mobileOpen}
+			aria-controls="mobile-nav"
+			onclick={() => (mobileOpen = !mobileOpen)}
+		>
+			<span class="material-symbols-outlined">{mobileOpen ? 'close' : 'menu'}</span>
+		</button>
+
 		<a
 			href="/settings"
 			aria-label="Profile"
@@ -58,4 +84,27 @@ src/lib/components/navbar.svelte
 			<span class="material-symbols-outlined">person</span>
 		</a>
 	</div>
+
+	<!-- mobile nav panel -->
+	{#if mobileOpen}
+		<div
+			id="mobile-nav"
+			class="sm:hidden absolute top-full left-0 w-full px-6 md:px-8 pb-4 bg-surface/80 backdrop-blur-xl"
+		>
+			<div class="flex flex-col gap-2 text-sm tracking-tight">
+				{#each navItems as item (item.href)}
+					<a
+						href={item.href}
+						data-sveltekit-preload-data="hover"
+						onclick={() => (mobileOpen = false)}
+						class={isActive(item.href)
+							? 'bg-primary-container text-on-primary rounded-pill px-4 py-3 font-semibold'
+							: 'text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container-low rounded-pill transition-colors duration-200'}
+					>
+						<span class="whitespace-nowrap">{item.label}</span>
+					</a>
+				{/each}
+			</div>
+		</div>
+	{/if}
 </nav>

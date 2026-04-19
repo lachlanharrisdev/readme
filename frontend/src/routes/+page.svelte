@@ -14,9 +14,9 @@ src/routes/+page.svelte
 	<PageHeader title="Good morning" subtitle="Something motivational would go here but I can't be bothered" />
 
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-		<Bento class="lg:col-span-2 p-8 lg:p-10 relative overflow-hidden flex flex-col justify-between min-h-[360px]">
-			<div class="absolute -right-8 -bottom-8 opacity-[0.06] text-on-surface pointer-events-none">
-				<span class="material-symbols-outlined" style="font-size: 320px">menu_book</span>
+		<Bento class="lg:col-span-2 relative overflow-hidden flex flex-col justify-between min-h-[360px]">
+			<div class="absolute right-0 hidden sm:block opacity-[0.03] text-on-surface pointer-events-none md:block ">
+				<span class="material-symbols-outlined" style="font-size: 240px">menu_book</span>
 			</div>
 
 			<div class="relative z-10">
@@ -25,7 +25,7 @@ src/routes/+page.svelte
 				</h2>
 				<p class="text-lg text-on-surface-variant mb-8">by Cormac McCarthy</p>
 
-				<div class="max-w-md">
+				<div class="max-w-md sm:max-w-xs md:max-w-sm lg:max-w-xs xl:max-w-md">
 					<div class="flex justify-between text-sm font-semibold text-on-surface-variant mb-3">
 						<span>Progress</span>
 						<span>0%</span>
@@ -56,7 +56,7 @@ src/routes/+page.svelte
 			</div>
 		</Bento>
 
-		<Bento class="p-8 flex flex-col min-h-[360px]">
+		<Bento class="flex flex-col min-h-[360px]">
 			<h3 class="text-xl font-headline font-semibold text-on-surface tracking-tight mb-10">Reading Stats</h3>
 			<div class="space-y-10">
 				<div class="flex items-center gap-5">
@@ -82,7 +82,7 @@ src/routes/+page.svelte
 			</div>
 		</Bento>
 
-		<Bento class="lg:col-span-2 p-8">
+		<Bento class="lg:col-span-2">
 			<div class="flex items-center justify-between mb-8">
 				<h3 class="text-xl font-headline font-semibold text-on-surface tracking-tight">Upcoming</h3>
 				<button type="button" class="text-primary-container text-sm font-semibold hover:text-primary transition-colors">
@@ -97,7 +97,7 @@ src/routes/+page.svelte
 					<div
 						class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface group-hover:bg-surface-container-lowest transition-colors"
 					>
-						<span class="material-symbols-outlined">import_contacts</span>
+						<span class="material-symbols-outlined">menu_book</span>
 					</div>
 					<div class="flex-1">
 						<h4 class="text-base font-bold text-on-surface">Orbital</h4>
@@ -128,7 +128,7 @@ src/routes/+page.svelte
 			class="block"
 			data-sveltekit-preload-data="hover"
 		>
-			<Bento class="p-8 flex flex-col justify-center items-center text-center cursor-pointer hover:bg-surface-container-low transition-colors group">
+			<Bento class="flex flex-col justify-center items-center text-center cursor-pointer hover:bg-surface-container-low transition-colors group">
 				<div
 					class="w-16 h-16 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface mb-6 group-hover:scale-110 transition-transform duration-300"
 				>

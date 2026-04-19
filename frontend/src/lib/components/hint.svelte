@@ -144,7 +144,7 @@ src/lib/components/hint.svelte
     });
 </script>
 
-<Bento class="p-8 h-full flex flex-col relative overflow-hidden">
+<Bento class="h-full flex flex-col relative overflow-hidden">
     <div class="w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center mb-6">
         <span class="material-symbols-outlined text-on-secondary-container text-2xl">wb_incandescent</span>
     </div>

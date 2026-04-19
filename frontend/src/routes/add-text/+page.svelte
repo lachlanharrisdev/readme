@@ -15,7 +15,7 @@ src/routes/add-text/+page.svelte
 	<PageHeader title="Add Text" subtitle="Define the parameters of your next reading commitment." />
 
 	<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-		<Bento class="lg:col-span-8 p-8 md:p-12 relative overflow-hidden">
+		<Bento class="lg:col-span-8 relative overflow-hidden">
 			<span
 				class="material-symbols-outlined absolute -bottom-10 -right-10 text-[200px] text-surface-container-low opacity-50 pointer-events-none select-none"
 			>

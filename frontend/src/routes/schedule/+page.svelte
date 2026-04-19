@@ -14,7 +14,7 @@ src/routes/schedule/+page.svelte
 	<PageHeader title="Schedule" subtitle="Track your reading path over the next two weeks" />
 
 	<section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-10">
-		<Bento class="p-8 relative overflow-hidden flex flex-col justify-between min-h-[260px]">
+		<Bento class="relative overflow-hidden flex flex-col justify-between min-h-[260px]">
 			<span
 				class="material-symbols-outlined fill absolute -bottom-8 -right-8 text-9xl text-surface-container-high opacity-40 select-none pointer-events-none"
 			>
@@ -42,7 +42,7 @@ src/routes/schedule/+page.svelte
 			</div>
 		</Bento>
 
-		<Bento class="p-8 flex flex-col justify-between lg:col-span-2">
+		<Bento class="flex flex-col justify-between lg:col-span-2">
 			<div class="flex items-start justify-between gap-8">
 				<div>
 					<h3 class="text-xl font-bold tracking-tight text-on-surface mb-3">Pace Analysis</h3>
@@ -142,7 +142,7 @@ src/routes/schedule/+page.svelte
 	</section>
 
     	<section class="mb-10">
-		<Bento class="p-6 md:p-8">
+		<Bento>
 			<h3 class="text-xl font-bold tracking-tight text-on-surface mb-6">Set Your Weekly Schedule</h3>
 			<form class="space-y-6">
 				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
