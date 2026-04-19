@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Lachlan Harris. All Rights Reserved.
 # This project is licensed under Apache 2.0
 #
-# src/api/v1/health.py
+# app/api/v1/health.py
 # Health check API endpoints according to the V1 specification
 
 from fastapi import APIRouter, Depends, HTTPException

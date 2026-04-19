@@ -214,3 +214,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+
+# ReadMe Specific Gitignores
+# --------------------------
+
+
+
+# database files
+*.db

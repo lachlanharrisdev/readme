@@ -1,15 +1,10 @@
 # Copyright (c) 2026 Lachlan Harris. All Rights Reserved.
 # This code is licensed under Apache 2.0
 #
-# Test file scoped to src/api/v1/auth
-
-from fastapi.testclient import TestClient
+# Test file scoped to app/api/v1/auth
 
 
-def test_auth_token_ok() -> None:
-    from app.main import app
-
-    client = TestClient(app)
+def test_auth_token_ok(client) -> None:
     res = client.post(
         "/api/v1/auth/token", data={"username": "lachlanharris", "password": "secret"}
     )
@@ -18,10 +13,7 @@ def test_auth_token_ok() -> None:
     assert res.json()["token_type"] == "bearer"
 
 
-def test_auth_token_bad_credentials() -> None:
-    from app.main import app
-
-    client = TestClient(app)
+def test_auth_token_bad_credentials(client) -> None:
     res = client.post(
         "/api/v1/auth/token",
         data={"username": "lachlanharris", "password": "wrongpassword"},
@@ -36,10 +28,7 @@ def test_auth_token_bad_credentials() -> None:
     assert res.json()["detail"] == "Incorrect username or password"
 
 
-def test_auth_me_ok() -> None:
-    from app.main import app
-
-    client = TestClient(app)
+def test_auth_me_ok(client) -> None:
     token_res = client.post(
         "/api/v1/auth/token", data={"username": "lachlanharris", "password": "secret"}
     )
@@ -49,18 +38,13 @@ def test_auth_me_ok() -> None:
         "/api/v1/auth/me", headers={"Authorization": f"Bearer {access_token}"}
     )
     assert res.status_code == 200
-    assert res.json() == {
-        "username": "lachlanharris",
-        "full_name": "Lachlan Harris",
-        "email": "contact@lachlanharris.dev",
-        "disabled": False,
-    }
+    body = res.json()
+    assert body["username"] == "lachlanharris"
+    assert isinstance(body["id"], int)
+    assert "created_at" in body
 
 
-def test_auth_me_no_token() -> None:
-    from app.main import app
-
-    client = TestClient(app)
+def test_auth_me_no_token(client) -> None:
     res = client.get("/api/v1/auth/me")
     assert res.status_code == 401
     assert res.json()["detail"] == "Not authenticated"
