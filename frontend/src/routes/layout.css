@@ -1,1 +1,52 @@
+/*
+Copyright (c) 2026 Lachlan Harris. All Rights Reserved.
+This project is licensed under Apache 2.0 
+
+src/routes/layout.css
+*/
+
+@config '../../tailwind.config.js';
 @import 'tailwindcss';
+
+@layer base {
+	:root {
+		font-synthesis: none;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	body {
+		@apply font-body bg-surface text-on-surface;
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-shadow: none !important;
+	}
+
+	::selection {
+		background: #2a5caa;
+		color: #ffffff;
+	}
+
+	.material-symbols-outlined {
+		font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+	}
+
+	.material-symbols-outlined.fill {
+		font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+	}
+}
+
+@layer utilities {
+	.hide-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.hide-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+}
