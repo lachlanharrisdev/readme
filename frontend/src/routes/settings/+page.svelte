@@ -9,6 +9,9 @@ src/routes/settings/+page.svelte
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Bento from '$lib/components/bento.svelte';
     import Streakitem from '$lib/components/streakitem.svelte';
+
+	let { data } = $props();
+	const username = $derived(data?.user?.username ?? 'user');
 </script>
 
 <main class="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -29,7 +32,7 @@ src/routes/settings/+page.svelte
 				<div
 					class="w-32 h-32 rounded-full bg-secondary-container flex items-center justify-center text-primary-container text-4xl font-extrabold"
 				>
-					L
+					{username.slice(0, 1).toUpperCase()}
 				</div>
 				<button
 					type="button"
@@ -41,7 +44,7 @@ src/routes/settings/+page.svelte
 			</div>
 
 			<div class="relative z-10 flex-1">
-				<h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight mb-4">@lachlanharrisdev</h2>
+				<h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight mb-4">@{username}</h2>
 				<div class="hidden md:flex flex-wrap gap-x-20 gap-y-4">
 					<Streakitem title="Books Read" stat="0" unit="" icon="menu_book" bg="surface-container-low" text="on-surface"/>
 					<Streakitem title="Current Streak" stat="0" unit="days" icon="local_fire_department"/>
@@ -62,7 +65,8 @@ src/routes/settings/+page.svelte
 					<input
 						id="username"
 						type="text"
-						value="lachlanharrisdev"
+						value={username}
+						readonly
 						class="w-full bg-surface-container-low border-none rounded-sm px-4 py-3 text-on-surface font-body focus:ring-0 outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 					/>
 				</div>
@@ -88,13 +92,21 @@ src/routes/settings/+page.svelte
 					</div>
 				</div>
 
-				<div class="pt-4">
+				<div class="pt-4 flex gap-2 md:gap-4">
 					<button
 						type="button"
-						class="w-full md:w-auto py-3 px-8 rounded-pill bg-gradient-to-r from-primary to-primary-container text-on-primary font-semibold hover:opacity-90 transition-opacity text-sm"
+						class="w-full md:w-auto py-3 px-8 rounded-pill bg-primary-container text-on-primary font-semibold hover:opacity-90 transition-opacity text-sm"
 					>
 						Save Changes
 					</button>
+					<form method="POST" action="?/logout" class="w-full md:w-auto">
+						<button
+							type="submit"
+							class="w-full md:w-auto py-3 px-8 rounded-pill bg-error-container text-on-error-container font-semibold hover:bg-error hover:text-on-error transition-colors text-sm"
+						>
+							Logout
+						</button>
+					</form>
 				</div>
 			</div>
 		</Bento>
