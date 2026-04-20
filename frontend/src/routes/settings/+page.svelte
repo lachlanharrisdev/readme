@@ -8,6 +8,7 @@ src/routes/settings/+page.svelte
 <script lang="ts">
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Bento from '$lib/components/bento.svelte';
+    import Streakitem from '$lib/components/streakitem.svelte';
 </script>
 
 <main class="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -28,31 +29,22 @@ src/routes/settings/+page.svelte
 				<div
 					class="w-32 h-32 rounded-full bg-secondary-container flex items-center justify-center text-primary-container text-4xl font-extrabold"
 				>
-					LH
+					L
 				</div>
 				<button
 					type="button"
 					aria-label="Edit avatar"
-					class="absolute bottom-0 right-0 w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center hover:scale-105 transition-transform"
+					class="absolute bottom-0 right-0 w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center hover:scale-105 transition-transform hidden"
 				>
 					<span class="material-symbols-outlined fill text-sm">edit</span>
 				</button>
 			</div>
 
 			<div class="relative z-10 flex-1">
-				<h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight mb-1">Lachlan Harris</h2>
-				<p class="text-on-surface-variant font-body text-base mb-6">@lachlanharrisdev</p>
-				<div class="flex flex-wrap gap-4">
-					<div class="bg-surface-container-low px-4 py-3 rounded-DEFAULT flex-1 min-w-[140px]">
-						<p class="text-xs font-label uppercase tracking-wider text-on-surface-variant mb-1">Books Read</p>
-						<p class="text-2xl font-headline font-bold text-primary">0</p>
-					</div>
-					<div class="bg-surface-container-low px-4 py-3 rounded-DEFAULT flex-1 min-w-[140px]">
-						<p class="text-xs font-label uppercase tracking-wider text-on-surface-variant mb-1">Reading Streak</p>
-						<p class="text-2xl font-headline font-bold text-primary">
-							0 <span class="text-sm font-normal text-on-surface-variant">Days</span>
-						</p>
-					</div>
+				<h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight mb-4">@lachlanharrisdev</h2>
+				<div class="hidden md:flex flex-wrap gap-x-20 gap-y-4">
+					<Streakitem title="Books Read" stat="0" unit="" icon="menu_book" bg="surface-container-low" text="on-surface"/>
+					<Streakitem title="Current Streak" stat="0" unit="days" icon="local_fire_department"/>
 				</div>
 			</div>
 		</Bento>

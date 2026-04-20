@@ -9,6 +9,7 @@ src/routes/+page.svelte
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Bento from '$lib/components/bento.svelte';
     import Textitem from '$lib/components/textitem.svelte';
+    import Streakitem from '$lib/components/streakitem.svelte';
 </script>
 
 <main class="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -60,26 +61,9 @@ src/routes/+page.svelte
 		<Bento class="flex flex-col min-h-[360px]">
 			<h3 class="text-xl font-headline font-semibold text-on-surface tracking-tight mb-10">Reading Stats</h3>
 			<div class="space-y-10">
-				<div class="flex items-center gap-5">
-					<div
-						class="w-16 h-16 rounded-full bg-secondary-container/50 flex items-center justify-center text-primary-container"
-					>
-						<span class="material-symbols-outlined fill text-3xl">local_fire_department</span>
-					</div>
-					<div>
-						<div class="text-4xl font-headline font-bold text-on-surface">0 Days</div>
-						<div class="text-sm text-on-surface-variant font-medium">Current Streak</div>
-					</div>
-				</div>
-				<div class="flex items-center gap-5">
-					<div class="w-16 h-16 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface">
-						<span class="material-symbols-outlined text-3xl">auto_stories</span>
-					</div>
-					<div>
-						<div class="text-4xl font-headline font-bold text-on-surface">0</div>
-						<div class="text-sm text-on-surface-variant font-medium">Pages this week</div>
-					</div>
-				</div>
+				<Streakitem title="Current Streak" stat="0" unit="days" icon="local_fire_department" />
+
+				<Streakitem title="Read this week" stat="0" unit="pages"icon="menu_book" bg="surface-container-low" text="on-surface" />
 			</div>
 		</Bento>
 
