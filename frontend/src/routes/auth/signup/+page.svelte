@@ -9,6 +9,9 @@ src/routes/auth/signup/+page.svelte
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Bento from '$lib/components/bento.svelte';
 	import Hint from '$lib/components/hint.svelte';
+	import { page } from '$app/state';
+
+	let { form } = $props();
 </script>
 
 <main class="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -22,15 +25,23 @@ src/routes/auth/signup/+page.svelte
 				post_add
 			</span>
 
-			<form class="space-y-8 relative z-10">
+			<form method="POST" class="space-y-8 relative z-10">
+				{#if form?.error}
+					<div class="rounded-DEFAULT bg-error-container text-on-error-container px-5 py-4 font-semibold text-sm">
+						{form.error}
+					</div>
+				{/if}
+
 				<div class="space-y-3">
 					<label class="block font-label text-sm uppercase tracking-widest text-on-surface-variant font-bold" for="username">
 						Username
 					</label>
 					<input
 						id="username"
+						name="username"
 						type="text"
 						placeholder="Username"
+						required
 						class="w-full bg-surface-container-low border-none focus:ring-0 rounded-DEFAULT px-6 py-4 text-on-surface placeholder:text-outline text-lg outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 					/>
 				</div>
@@ -41,19 +52,21 @@ src/routes/auth/signup/+page.svelte
 					</label>
 					<input
 						id="password"
+						name="password"
 						type="password"
 						placeholder="Password"
+						required
 						class="w-full bg-surface-container-low border-none focus:ring-0 rounded-DEFAULT px-6 py-4 text-on-surface placeholder:text-outline text-lg outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 					/>
 				</div>
 
-				<a href="/auth/login" class="text-sm text-primary hover:underline">
+				<a href={'/auth/login' + page.url.search} class="text-sm text-primary hover:underline">
 					Already have an account? Login here.
 				</a>
 
 				<div class="pt-6">
 					<button
-						type="button"
+						type="submit"
 						class="w-full md:w-auto md:px-12 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-pill py-4 text-lg font-bold flex items-center justify-center gap-3 transition-transform hover:scale-[0.99] focus:outline-none"
 					>
 						Signup
