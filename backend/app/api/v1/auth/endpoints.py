@@ -43,7 +43,7 @@ async def login_for_access_token(
         token_type: string ("bearer")
 
     Errors:
-        401 Unauthorized: If the username or password is incorrect
+        401: if the username or password is incorrect
     """
     user = authenticate_user(session, form_data.username, form_data.password)
     if not user:
@@ -73,7 +73,7 @@ def signup(user: UserCreate, session: SessionDep) -> User:
         created_at: timestamp
 
     Errors:
-        409 Conflict: If the username already exists
+        409: if the username already exists
     """
 
     existing = session.exec(

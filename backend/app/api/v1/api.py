@@ -7,10 +7,15 @@
 
 from fastapi import APIRouter
 
-from .auth import endpoints
+from .auth import endpoints as auth_endpoints
+from .scheduling import endpoints as scheduling_endpoints
 from . import health
 
 api_router = APIRouter()
-api_router.include_router(endpoints.router, prefix="/auth", tags=["auth"])
+api_router.include_router(auth_endpoints.router, prefix="/auth", tags=["auth"])
+
+api_router.include_router(
+    scheduling_endpoints.router, prefix="/scheduling", tags=["scheduling"]
+)
 
 api_router.include_router(health.router, prefix="/health", tags=["health"])

@@ -71,6 +71,10 @@ class AvailabilityDB(SQLModel, table=True):
     user_id: int = Field(foreign_key="users.id", nullable=False, index=True)
     day_of_week: int = Field(nullable=False)
     available_minutes: int | None = None
+    created_at: datetime | None = Field(
+        default=None,
+        sa_column=Column(DateTime(timezone=True), server_default=func.now(), nullable=False),
+    )
 
 
 class SessionDB(SQLModel, table=True):

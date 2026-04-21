@@ -25,9 +25,10 @@ export const load: LayoutServerLoad = async ({ url, cookies }) => {
 		throw redirect(303, `/auth/login?redirectTo=${encodeURIComponent(redirectTo)}`);
 	}
 
-	if (isAuthed && (url.pathname === '/auth/login' || url.pathname === '/auth/signup')) {
+	if (isAuthed && isAuthRoute(url.pathname)) {
 		throw redirect(303, url.searchParams.get('redirectTo') || '/');
 	}
 
 	return {};
 };
+
