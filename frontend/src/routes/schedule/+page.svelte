@@ -8,8 +8,20 @@ src/routes/schedule/+page.svelte
 <script lang="ts">
 	import PageHeader from '$lib/components/pageheader.svelte';
 	import Bento from '$lib/components/bento.svelte';
-    import Textitem from '$lib/components/textitem.svelte';
-    import { page } from '$app/state';
+	import Textitem from '$lib/components/textitem.svelte';
+
+	let { data, form } = $props();
+
+	const getMinutes = (availability: Record<string, number> | undefined, day: number): number => {
+		if (!availability) return 0;
+		const v = availability[String(day)];
+		return typeof v === 'number' && Number.isFinite(v) ? v : 0;
+	};
+
+	const availability = $derived(
+		((form as any)?.schedule?.availability as Record<string, number> | undefined) ||
+			((data as any)?.schedule?.availability as Record<string, number> | undefined)
+	);
 </script>
 
 <main class="max-w-[1400px] mx-auto px-6 md:px-12">
@@ -115,7 +127,17 @@ src/routes/schedule/+page.svelte
 	<section class="mb-10">
 		<Bento>
 			<h3 class="text-xl font-bold tracking-tight text-on-surface mb-6">Set Your Weekly Schedule</h3>
-			<form class="space-y-6">
+			<form method="POST" class="space-y-6">
+				{#if form?.error}
+					<div class="rounded-DEFAULT bg-error-container text-on-error-container px-5 py-4 font-semibold text-sm">
+						{form.error}
+					</div>
+				{/if}
+				{#if form?.success}
+					<div class="rounded-DEFAULT bg-secondary-container text-on-secondary-container px-5 py-4 font-semibold text-sm">
+						Schedule updated.
+					</div>
+				{/if}
 				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
 					<div class="flex flex-col gap-1.5">
 						<label class="block text-xs uppercase tracking-widest text-on-surface-variant font-bold" for="sunday">
@@ -123,9 +145,12 @@ src/routes/schedule/+page.svelte
 						</label>
 						<input
 							id="sunday"
+							name="0"
 							type="number"
 							placeholder="0"
 							min="0"
+							max="1440"
+							value={getMinutes(availability, 0)}
 							class="w-full bg-surface-container-low border-none focus:ring-0 rounded-DEFAULT px-3 py-2 text-on-surface placeholder:text-outline text-sm outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 						/>
 					</div>
@@ -135,9 +160,12 @@ src/routes/schedule/+page.svelte
 						</label>
 						<input
 							id="monday"
+							name="1"
 							type="number"
 							placeholder="0"
 							min="0"
+							max="1440"
+							value={getMinutes(availability, 1)}
 							class="w-full bg-surface-container-low border-none focus:ring-0 rounded-DEFAULT px-3 py-2 text-on-surface placeholder:text-outline text-sm outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 						/>
 					</div>
@@ -147,9 +175,12 @@ src/routes/schedule/+page.svelte
 						</label>
 						<input
 							id="tuesday"
+							name="2"
 							type="number"
 							placeholder="0"
 							min="0"
+							max="1440"
+							value={getMinutes(availability, 2)}
 							class="w-full bg-surface-container-low border-none focus:ring-0 rounded-DEFAULT px-3 py-2 text-on-surface placeholder:text-outline text-sm outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 						/>
 					</div>
@@ -159,9 +190,12 @@ src/routes/schedule/+page.svelte
 						</label>
 						<input
 							id="wednesday"
+							name="3"
 							type="number"
 							placeholder="0"
 							min="0"
+							max="1440"
+							value={getMinutes(availability, 3)}
 							class="w-full bg-surface-container-low border-none focus:ring-0 rounded-DEFAULT px-3 py-2 text-on-surface placeholder:text-outline text-sm outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 						/>
 					</div>
@@ -171,9 +205,12 @@ src/routes/schedule/+page.svelte
 						</label>
 						<input
 							id="thursday"
+							name="4"
 							type="number"
 							placeholder="0"
 							min="0"
+							max="1440"
+							value={getMinutes(availability, 4)}
 							class="w-full bg-surface-container-low border-none focus:ring-0 rounded-DEFAULT px-3 py-2 text-on-surface placeholder:text-outline text-sm outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 						/>
 					</div>
@@ -183,9 +220,12 @@ src/routes/schedule/+page.svelte
 						</label>
 						<input
 							id="friday"
+							name="5"
 							type="number"
 							placeholder="0"
 							min="0"
+							max="1440"
+							value={getMinutes(availability, 5)}
 							class="w-full bg-surface-container-low border-none focus:ring-0 rounded-DEFAULT px-3 py-2 text-on-surface placeholder:text-outline text-sm outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 						/>
 					</div>
@@ -195,9 +235,12 @@ src/routes/schedule/+page.svelte
 						</label>
 						<input
 							id="saturday"
+							name="6"
 							type="number"
 							placeholder="0"
 							min="0"
+							max="1440"
+							value={getMinutes(availability, 6)}
 							class="w-full bg-surface-container-low border-none focus:ring-0 rounded-DEFAULT px-3 py-2 text-on-surface placeholder:text-outline text-sm outline outline-2 outline-transparent focus:outline-primary/30 outline-offset-2"
 						/>
 					</div>
@@ -205,7 +248,7 @@ src/routes/schedule/+page.svelte
 				<p class="text-xs text-on-surface-variant font-medium tracking-wide">minutes per day</p>
 				<div class="pt-2">
 					<button
-						type="button"
+						type="submit"
 						class="w-full md:w-auto md:px-12 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-pill py-3 text-base font-bold flex items-center justify-center gap-3 transition-transform hover:scale-[0.99] focus:outline-none"
 					>
 						<span class="material-symbols-outlined fill text-lg">update</span>
