@@ -9,13 +9,15 @@ from fastapi import APIRouter
 
 from .auth import endpoints as auth_endpoints
 from .scheduling import endpoints as scheduling_endpoints
+from .texts import endpoints as texts_endpoints
 from . import health
 
 api_router = APIRouter()
-api_router.include_router(auth_endpoints.router, prefix="/auth", tags=["auth"])
 
+api_router.include_router(auth_endpoints.router, prefix="/auth", tags=["auth"])
 api_router.include_router(
     scheduling_endpoints.router, prefix="/scheduling", tags=["scheduling"]
 )
+api_router.include_router(texts_endpoints.router, prefix="/texts", tags=["texts"])
 
 api_router.include_router(health.router, prefix="/health", tags=["health"])
