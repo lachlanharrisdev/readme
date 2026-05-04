@@ -7,11 +7,9 @@
 from .config import *
 from .auth import *
 
-import jwt
-
 from datetime import timedelta
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 from typing import Annotated
 
 from sqlmodel import select
@@ -29,7 +27,7 @@ router = APIRouter()
 @router.post("/token")
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-    session: SessionDep,
+    session: SessionDep,  # type: ignore
 ) -> Token:
     """
     Request a JWT access token by providing a username and password
@@ -60,7 +58,7 @@ async def login_for_access_token(
 
 
 @router.post("/signup", response_model=User)
-def signup(user: UserCreate, session: SessionDep) -> User:
+def signup(user: UserCreate, session: SessionDep) -> User:  # type: ignore
     """Register a new user.
 
     Requires:

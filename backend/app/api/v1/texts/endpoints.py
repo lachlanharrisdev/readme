@@ -22,7 +22,7 @@ router = APIRouter()
 async def get_text(
     text_id: int,
     current_user: Annotated[User, Depends(get_current_active_user)],
-    session: SessionDep,
+    session: SessionDep,  # type: ignore
 ):
     """
     Get a specific text by ID for the authenticated user
@@ -51,7 +51,7 @@ async def get_text(
 @router.post("/new", response_model=TextDB)
 async def new_text(
     current_user: Annotated[User, Depends(get_current_active_user)],
-    session: SessionDep,
+    session: SessionDep,  # type: ignore
     text: TextDB,
 ):
     """
@@ -96,7 +96,7 @@ async def new_text(
 async def delete_text(
     text_id: int,
     current_user: Annotated[User, Depends(get_current_active_user)],
-    session: SessionDep,
+    session: SessionDep,  # type: ignore
 ):
     """
     Delete a specific text by ID for the authenticated user
@@ -129,7 +129,7 @@ async def delete_text(
 async def update_text(
     text_id: int,
     current_user: Annotated[User, Depends(get_current_active_user)],
-    session: SessionDep,
+    session: SessionDep,  # type: ignore
     updated_text: TextDB,
 ):
     """
