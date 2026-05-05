@@ -17,14 +17,13 @@ from app.api.v1.models import AvailabilityDB
 from sqlalchemy import delete
 from sqlmodel import select
 
-
 router = APIRouter()
 
 
 @router.get("/schedule", response_model=ScheduleForm)
 async def get_schedule(
     current_user: Annotated[User, Depends(get_current_active_user)],
-    session: SessionDep,
+    session: SessionDep,  # type: ignore
 ) -> ScheduleForm:
     """
     return the authenticated user's current availability schedule
@@ -55,7 +54,7 @@ async def get_schedule(
 async def submit_schedule(
     current_user: Annotated[User, Depends(get_current_active_user)],
     schedule: ScheduleForm,
-    session: SessionDep,
+    session: SessionDep,  # type: ignore
 ) -> ScheduleForm:
     """
     submit weekday availability schedule for the authenticated user,
